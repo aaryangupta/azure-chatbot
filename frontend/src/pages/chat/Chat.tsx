@@ -48,7 +48,14 @@ const enum messageStatus {
 const Chat = () => {
   const appStateContext = useContext(AppStateContext)
   const ui = appStateContext?.state.frontendSettings?.ui
-  const AUTH_ENABLED = false
+
+  const AUTH_ENABLED = false; // Disable authentication
+
+  useEffect(() => {
+    if (AUTH_ENABLED) {
+      getUserInfoList();
+    }
+  }, [AUTH_ENABLED]);
   const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showLoadingMessage, setShowLoadingMessage] = useState<boolean>(false)
