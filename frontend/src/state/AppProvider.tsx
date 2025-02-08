@@ -62,7 +62,9 @@ const initialState: AppState = {
     cosmosDB: false,
     status: CosmosDBStatus.NotConfigured
   },
-  frontendSettings: null,
+  frontendSettings: {
+    auth_enabled: "false", // Disable authentication
+  } as FrontendSettings,
   feedbackState: {},
   isLoading: true,
   answerExecResult: {},
@@ -146,7 +148,7 @@ export const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) 
     const getFrontendSettings = async () => {
       frontendSettings()
         .then(response => {
-          dispatch({ type: 'FETCH_FRONTEND_SETTINGS', payload: response as FrontendSettings })
+          dispatch({ type: 'FETCH_FRONTEND_SETTINGS', payload: { ...response, auth_enabled: "false" } as FrontendSettings })
         })
         .catch(_err => {
           console.error('There was an issue fetching your data.')
