@@ -31,6 +31,11 @@ const Layout = () => {
     setCopyText('Copy URL')
   }
 
+  useEffect(() => {
+    document.title = 'hayakoum-ai-chatbot';  // Set your desired title here
+  }, []);
+
+
   const handleCopyClick = () => {
     navigator.clipboard.writeText(window.location.href)
     setCopyClicked(true)
